@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="NammaTumakuru - Discover Karnataka's iconic heritage circuit, Asia's monolithic forts, sacred temples, natural springs, authentic culinary trails, and real-time live browser GPS distance calculations.">
+  <meta name="keywords"
+    content="Tumkur tourism, Namma Tumakuru, Siddaganga Mutt, Devarayanadurga, Madhugiri Fort, Namada Chilume, Mandaragiri Pinchi Dome, Goravanahalli, Shivagange, Tumkur food">
+  <meta name="author" content="NammaTumakuru Tourism Portal">
+
+  <title>NammaTumakuru | Official Heritage Circuit & Tourism Portal</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <!-- ===================================================================
+       1. NAVIGATION HEADER
+       =================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="nav-brand" id="navBrandLogo">
+        <!-- Logo image with updated NammaTumakuru branding -->
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NammaTumakuru Logo" class="nav-logo-img"
+          id="navLogoImg">
+        <div class="brand-text-wrap">
+          <span class="brand-title">NammaTumakuru</span>
+          <span class="brand-sub">Heritage & Tourism Portal</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="primaryNavLinks">
+          <li><a href="#destinations" class="nav-link">Heritage Circuit</a></li>
+          <li><a href="#distance-tracker" class="nav-link">Distance Tracker</a></li>
+          <li><a href="#culinary" class="nav-link">Culinary Guide</a></li>
+          <li><a href="#feedback" class="nav-link">Traveler Reviews</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Revered Dr. Sri Sri Shivakumara Swamiji Header Tribute -->
+        <a href="#card-siddaganga" onclick="openDestinationModal('siddaganga')" class="swamiji-header-badge"
+          id="navSwamijiBadge"
+          title="Dr. Sree Sree Shivakumara Swamiji • ನಡೆದಾಡುವ ದೇವರು (Click to explore Sree Siddaganga Mutt)">
+          <div class="swamiji-avatar-frame">
+            <img src="{{ url_for('static', filename='images/swamiji_portrait.png') }}"
+              alt="Dr. Sree Sree Shivakumara Swamiji" class="swamiji-avatar-img">
+            <span class="swamiji-halo"></span>
+          </div>
+          <div class="swamiji-badge-info">
+            <span class="swamiji-title-kannada">ನಡೆದಾಡುವ ದೇವರು</span>
+            <span class="swamiji-name-sub">Dr. Shivakumara Swamiji</span>
+          </div>
+        </a>
+
+        <button class="btn-gps-nav" id="navGpsBtn" onclick="detectBrowserLocation()"
+          title="Calculate distance from your current location">
+          <span class="pulse-dot"></span> GPS Tracker
+        </button>
+        <a href="#feedback" class="btn-primary" style="padding: 0.55rem 1.2rem; font-size: 0.88rem;">
+          Rate Trip
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       HERO BANNER SECTION
+       =================================================================== -->
+  <main>
+    <section class="hero-section" id="home">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <span>✨ Discover Karnataka's Sacred Horizon</span>
+        </div>
+        <h1 class="hero-title">
+          Explore the Legendary <span>Heritage of Tumakuru</span>
+        </h1>
+        <p class="hero-desc">
+          Step into a land of ancient monolithic fortresses, centuries of selfless spiritual dasoha, perennial forest
+          springs, and celebrated culinary trails. Calculate live driving distances directly from your browser.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#destinations" class="btn-primary" id="heroExploreBtn">
+            <span>Explore 7 Heritage Wonders</span>
+            <i>→</i>
+          </a>
+          <button class="btn-secondary" onclick="detectBrowserLocation()" id="heroGpsBtn">
+            <span>📍 Detect My Live Distance</span>
+          </button>
+        </div>
+
+        <div class="hero-stats-strip">
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">10</span>
+            <span class="hero-stat-label">Iconic Destinations</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">1,200m</span>
+            <span class="hero-stat-label">Asia's Monolith Peak</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">6+</span>
+            <span class="hero-stat-label">Authentic Food Trails</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">Haversine</span>
+            <span class="hero-stat-label">Real-time GPS Calc</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         3. LIVE DISTANCE TRACKER DOCK
+         =================================================================== -->
+    <section class="gps-bar-section" id="distance-tracker">
+      <div class="container">
+        <div class="gps-dock-card">
+          <div class="gps-status-group">
+            <div class="gps-beacon-icon">
+              <span class="pulse-dot"></span>
+            </div>
+            <div class="gps-details">
+              <h4>
+                <span>Live Browser Distance Tracker</span>
+                <span class="kannada-sub">(ಲೈವ್ ಅಂತರ ಲೆಕ್ಕಾಚಾರ)</span>
+              </h4>
+              <p class="gps-coords-text" id="activeCoordsDisplay">
+                Detecting browser coordinates via Geolocation API...
+              </p>
+            </div>
+          </div>
+
+          <div class="gps-controls">
+            <label for="gpsCitySelect" style="font-size: 0.85rem; color: var(--text-muted);">Origin:</label>
+            <select id="gpsCitySelect" class="gps-select-city" onchange="handleOriginCityChange(this)">
+              <option value="tumkur_center" selected>Tumakuru Central (13.3409°N, 77.1010°E)</option>
+              <option value="bangalore_majestic">Bengaluru Majestic KBS (12.9767°N, 77.5713°E)</option>
+              <option value="bangalore_airport">Bengaluru Airport BLR (13.1986°N, 77.7066°E)</option>
+              <option value="mysuru_palace">Mysuru Palace (12.3052°N, 76.6552°E)</option>
+              <option value="live_gps">⚡ Use Live Browser GPS</option>
+            </select>
+
+            <button class="btn-detect-gps" id="btnDetectGps" onclick="detectBrowserLocation()">
+              <span>📡 Detect My GPS</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         2. THE HERITAGE CIRCUIT (7 TRAVEL DESTINATIONS)
+         =================================================================== -->
+    <section class="section" id="destinations">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>The Sacred 7 Circuits • ಹೆರಿಟೇಜ್ ಸರ್ಕ್ಯೂಟ್</span>
+          </div>
+          <h2 class="section-title">
+            The Heritage Circuit of <span>Tumakuru</span>
+          </h2>
+          <p class="section-desc">
+            Journey across sacred hillock summits, centuries of humanitarian legacy, awe-inspiring monolithic trekking
+            paths, and perennial forest springs with live browser distance tracking.
+          </p>
+        </div>
+
+        <div class="destinations-grid" id="destinationsGrid">
+          {% for dest in destinations %}
+          <article class="destination-card" id="card-{{ dest.id }}">
+            <div class="card-img-wrapper">
+              <img src="{{ url_for('static', filename=dest.image.replace('static/', '')) }}" alt="{{ dest.name }}"
+                class="card-img" loading="lazy">
+              <div class="card-img-gradient"></div>
+
+              <div class="card-top-badges">
+                <span class="category-badge">{{ dest.tag }}</span>
+                <span class="live-distance-badge" id="distance-badge-{{ dest.id }}"
+                  onclick="openDestinationModal('{{ dest.id }}')">
+                  <span>📍 Calculating...</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="card-content">
+              <div class="card-header-meta">
+                <h3 class="card-title">{{ dest.name }}</h3>
+                <span class="card-kannada">{{ dest.kannada }}</span>
+                <div class="card-coords-pill">
+                  <span>Lat: {{ dest.lat }}</span> • <span>Lng: {{ dest.lng }}</span>
+                </div>
+              </div>
+
+              <p class="card-summary">{{ dest.summary }}</p>
+
+              <ul class="card-highlights-preview">
+                {% for highlight in dest.highlights[:2] %}
+                <li>
+                  <span class="highlight-bullet">✦</span>
+                  <span>{{ highlight }}</span>
+                </li>
+                {% endfor %}
+              </ul>
+
+              <div class="card-footer">
+                <button class="btn-card-explore" onclick="openDestinationModal('{{ dest.id }}')"
+                  id="btn-explore-{{ dest.id }}">
+                  <span>View Details & Modal</span>
+                  <i>↗</i>
+                </button>
+                <button class="btn-calc-single" onclick="updateAllDistances()" title="Recalculate distance">
+                  <span>🔄 Recalculate</span>
+                </button>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         DESTINATION MODAL VIEW WINDOW (DYNAMIC CONTAINER)
+         =================================================================== -->
+    <div class="modal-overlay" id="destinationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-container">
+        <button class="modal-close-btn" onclick="closeDestinationModal()" aria-label="Close modal window">✕</button>
+
+        <div class="modal-hero-banner">
+          <img src="" alt="" id="modalHeroImg" class="modal-banner-img">
+          <div class="modal-banner-grad"></div>
+          <div class="modal-banner-content">
+            <span class="modal-tag" id="modalTag">Heritage Destination</span>
+            <h3 class="modal-title" id="modalTitle">Destination Name</h3>
+            <span class="modal-kannada" id="modalKannada">ಸ್ಥಳದ ಹೆಸರು</span>
+          </div>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-info-strip">
+            <div class="info-item">
+              <span class="info-label">Visiting Hours</span>
+              <span class="info-value" id="modalTimings">06:00 AM - 08:30 PM</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Ideal Season</span>
+              <span class="info-value" id="modalBestTime">October to March</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Entry Fee</span>
+              <span class="info-value" id="modalEntryFee">Free Admission</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Altitude</span>
+              <span class="info-value" id="modalElevation">850 m</span>
+            </div>
+          </div>
+
+          <h4 class="modal-section-title">
+            <span>📜 Historical Significance & Overview</span>
+          </h4>
+          <p class="modal-description" id="modalDescription">Detailed information goes here.</p>
+
+          <h4 class="modal-section-title">
+            <span>🌟 Key Architectural & Cultural Highlights</span>
+          </h4>
+          <ul class="modal-highlights-list" id="modalHighlightsList">
+            <!-- Highlights populated dynamically via JavaScript -->
+          </ul>
+
+          <div class="modal-distance-box">
+            <div class="distance-metric">
+              <h5>Live Haversine Distance</h5>
+              <p id="modalDistanceValue">-- km</p>
+              <small id="modalDistanceOrigin" style="color: var(--text-muted); font-size: 0.8rem;"></small>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-secondary" onclick="detectBrowserLocation()"
+                style="font-size: 0.88rem; padding: 0.65rem 1.2rem;">
+                📍 Refresh GPS
+              </button>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="btn-maps-nav" id="modalMapsLink">
+                <span>Google Maps Directions</span>
+                <i>↗</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         4. CULINARY GUIDE SECTIONS (TABULAR TOGGLE DISPLAY)
+         =================================================================== -->
+    <section class="section" id="culinary">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Gastronomy of Tumakuru • ಆಹಾರ ಸಂಸ್ಕೃತಿ</span>
+          </div>
+          <h2 class="section-title">
+            Culinary Guide: <span>Flavors of the Land</span>
+          </h2>
+          <p class="section-desc">
+            Indulge in authentic traditional Karnataka cuisine. Toggle between pure vegetarian satvik delicacies and
+            world-famous rustic Nati-style non-vegetarian specialties.
+          </p>
+        </div>
+
+        <!-- Tab Toggle Buttons -->
+        <div class="culinary-nav-tabs">
+          <button class="tab-btn active veg-tab" id="tabBtnVeg" onclick="switchCulinaryTab('veg')">
+            <span>🌱 Pure Veg (ಸಸ್ಯಾಹಾರಿ)</span>
+          </button>
+          <button class="tab-btn" id="tabBtnNonVeg" onclick="switchCulinaryTab('nonveg')">
+            <span>🍗 Non-Veg (ಮಾಂಸಾಹಾರಿ)</span>
+          </button>
+        </div>
+
+        <!-- PURE VEG TAB PANE -->
+        <div class="tab-pane active" id="panePureVeg">
+          <div class="culinary-table-wrapper">
+            <table class="culinary-table">
+              <thead>
+                <tr>
+                  <th>Restaurant & Cuisine</th>
+                  <th>Location & Landmark</th>
+                  <th>Signature Specialties</th>
+                  <th>Avg Cost & Timings</th>
+                  <th>Rating</th>
+                  <th>Route</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in culinary['pure_veg'] %}
+                <tr>
+                  <td>
+                    <div class="restaurant-cell-info">
+                      <img src="{{ url_for('static', filename=item.image.replace('static/', '')) }}"
+                        alt="{{ item.name }}" class="rest-thumb" loading="lazy">
+                      <div class="rest-name-group">
+                        <h4>{{ item.name }}</h4>
+                        <span class="kannada-sub">{{ item.kannada }}</span>
+                        <div><span class="rest-badge-pill badge-veg">{{ item.tag }}</span></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="font-weight: 600; color: #fff;">{{ item.location }}</div>
+                    <small style="color: var(--text-dim);">Central Tumakuru Hub</small>
+                  </td>
+                  <td>
+                    <div class="specialty-tags-cloud">
+                      {% for spec in item.specialties %}
+                      <span class="food-pill">{{ spec }}</span>
+                      {% endfor %}
+                    </div>
+                  </td>
+                  <td>
+                    <div style="font-weight: 700; color: var(--primary-gold-light);">{{ item.cost }}</div>
+                    <small style="color: var(--text-dim);">{{ item.timings }}</small>
+                  </td>
+                  <td>
+                    <span class="rating-score-badge">★ {{ item.rating }}</span>
+                  </td>
+                  <td>
+                    <a href="{{ item.maps_url if item.maps_url else 'https://www.google.com/maps/search/?api=1&query=' ~ item.maps_query|urlencode }}"
+                      target="_blank" rel="noopener noreferrer" class="btn-table-route">
+                      <span>Maps</span> <i>↗</i>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- NON-VEG TAB PANE -->
+        <div class="tab-pane" id="paneNonVeg">
+          <div class="culinary-table-wrapper">
+            <table class="culinary-table">
+              <thead>
+                <tr>
+                  <th>Restaurant & Cuisine</th>
+                  <th>Location & Landmark</th>
+                  <th>Signature Specialties</th>
+                  <th>Avg Cost & Timings</th>
+                  <th>Rating</th>
+                  <th>Route</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in culinary['non_veg'] %}
+                <tr>
+                  <td>
+                    <div class="restaurant-cell-info">
+                      <img src="{{ url_for('static', filename=item.image.replace('static/', '')) }}"
+                        alt="{{ item.name }}" class="rest-thumb" loading="lazy">
+                      <div class="rest-name-group">
+                        <h4>{{ item.name }}</h4>
+                        <span class="kannada-sub">{{ item.kannada }}</span>
+                        <div><span class="rest-badge-pill badge-nonveg">{{ item.tag }}</span></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="font-weight: 600; color: #fff;">{{ item.location }}</div>
+                    <small style="color: var(--text-dim);">Highway & Downtown Hub</small>
+                  </td>
+                  <td>
+                    <div class="specialty-tags-cloud">
+                      {% for spec in item.specialties %}
+                      <span class="food-pill">{{ spec }}</span>
+                      {% endfor %}
+                    </div>
+                  </td>
+                  <td>
+                    <div style="font-weight: 700; color: var(--primary-gold-light);">{{ item.cost }}</div>
+                    <small style="color: var(--text-dim);">{{ item.timings }}</small>
+                  </td>
+                  <td>
+                    <span class="rating-score-badge">★ {{ item.rating }}</span>
+                  </td>
+                  <td>
+                    <a href="{{ item.maps_url if item.maps_url else 'https://www.google.com/maps/search/?api=1&query=' ~ item.maps_query|urlencode }}"
+                      target="_blank" rel="noopener noreferrer" class="btn-table-route">
+                      <span>Maps</span> <i>↗</i>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. USER FEEDBACK BACKEND & LIVE STREAM CONTAINER
+         =================================================================== -->
+    <section class="section" id="feedback">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Community Echoes • ನಿಮ್ಮ ಅನಿಸಿಕೆಗಳು</span>
+          </div>
+          <h2 class="section-title">
+            Traveler Feedback & <span>Live Stream</span>
+          </h2>
+          <p class="section-desc">
+            Your travel stories inspire future pilgrims and adventurers. Rate your experience, share tips, and watch
+            your feedback update live in our persistent SQLite community stream.
+          </p>
+        </div>
+
+        <div class="feedback-grid">
+          <!-- Feedback Form Card -->
+          <div class="feedback-form-card">
+            <div class="form-header">
+              <h3>Share Your Experience</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Stored persistently in the SQLite database (<code>feedback.db</code>).
+              </p>
+            </div>
+
+            <form id="feedbackForm">
+              <div class="form-group">
+                <label for="feedbackName" class="form-label">Full Name / Traveler Name *</label>
+                <input type="text" id="feedbackName" class="form-input" placeholder="e.g., Rohan Deshmukh" required>
+              </div>
+
+              <div class="form-group">
+                <label for="feedbackDestination" class="form-label">Destination Visited</label>
+                <select id="feedbackDestination" class="form-select">
+                  <option value="Sree Siddaganga Mutt">Sree Siddaganga Mutt (ಶ್ರೀ ಸಿದ್ಧಗಂಗಾ ಮಠ)</option>
+                  <option value="Devarayanadurga">Devarayanadurga (ದೇವರಾಯನದುರ್ಗ)</option>
+                  <option value="Madhugiri Fort">Madhugiri Fort (ಮಧುಗಿರಿ ಕೋಟೆ)</option>
+                  <option value="Namada Chilume">Namada Chilume (ನಾಮದ ಚಿಲುಮೆ)</option>
+                  <option value="Mandaragiri Jain Temple">Mandaragiri Jain Temple (ಮಂದಾರಗಿರಿ)</option>
+                  <option value="Goravanahalli Mahalakshmi Temple">Goravanahalli Temple (ಗೊರವನಹಳ್ಳಿ)</option>
+                  <option value="Shivagange">Shivagange (ಶಿವಗಂಗೆ ಬೆಟ್ಟ)</option>
+                  <option value="Kaidala Shri Chennakeshava Swamy Temple">Kaidala Shri Chennakeshava Temple (ಕೈದಾಳ)
+                  </option>
+                  <option value="Siddara Betta (Gavi Gudi)">Siddara Betta (ಸಿದ್ಧರ ಬೆಟ್ಟ)</option>
+                  <option value="Channarayana Durga Fort">Channarayana Durga Fort (ಚನ್ನರಾಯನದುರ್ಗ)</option>
+                  <option value="NR Kitchen Nati Style Biryani">NR Kitchen Nati Style Biryani (ಎನ್‌ಆರ್ ಕಿಚನ್)</option>
+                  <option value="Culinary Trail">Tumakuru Culinary Trail (ಆಹಾರ ಪ್ರವಾಸ)</option>
+                  <option value="Full Heritage Circuit">Complete Heritage Circuit</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Your Rating (1 to 5 Stars) *</label>
+                <div class="star-rating-control">
+                  <div class="stars-picker" id="starsPicker">
+                    <span class="star-choice" data-star="1" title="1 Star">★</span>
+                    <span class="star-choice" data-star="2" title="2 Stars">★</span>
+                    <span class="star-choice" data-star="3" title="3 Stars">★</span>
+                    <span class="star-choice" data-star="4" title="4 Stars">★</span>
+                    <span class="star-choice" data-star="5" title="5 Stars">★</span>
+                  </div>
+                  <input type="hidden" id="feedbackRatingInput" value="5">
+                  <span class="rating-text-label" id="ratingDisplayLabel">5 Stars - Outstanding Heritage!</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="feedbackComment" class="form-label">Travel Review & Comments *</label>
+                <textarea id="feedbackComment" class="form-textarea"
+                  placeholder="Share your experience, recommendations, food tips, or morning trekking memories..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit-feedback" id="btnSubmitFeedback">
+                <span>Publish Review to Live Stream</span>
+                <i>→</i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Live Stream Container -->
+          <div class="feedback-stream-card">
+            <div class="stream-header">
+              <div class="stream-stats">
+                <div class="stream-overall-score" id="streamAvgScore">4.9</div>
+                <div>
+                  <h4 style="font-size: 1.1rem; color: #fff;">Traveler Satisfaction</h4>
+                  <span class="stream-count-text" id="streamTotalCount">Based on active database entries</span>
+                </div>
+              </div>
+              <div>
+                <span class="live-indicator-pill">
+                  <span class="pulse-dot"></span> Live SQLite Sync
+                </span>
+              </div>
+            </div>
+
+            <!-- Dynamic Stream Feed from Flask SQLite API -->
+            <div class="stream-feed-list" id="feedbackLiveFeed">
+              <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                <span>Loading verified community reviews from SQLite database...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================
+       FOOTER
+       =================================================================== -->
+  <footer class="portal-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="nav-brand" style="margin-bottom: 0.8rem;">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NammaTumakuru Logo"
+              class="nav-logo-img">
+            <span class="brand-title">NammaTumakuru</span>
+          </div>
+          <p>
+            The comprehensive digital travel gateway for Tumakuru district, Karnataka. Showcasing historical monolithic
+            fortifications, spiritual heritage, nature sanctuaries, and authentic regional gastronomy.
+          </p>
+          <div style="display: flex; gap: 10px;">
+            <span class="category-badge">Karnataka Tourism</span>
+            <span class="category-badge">Namma Tumakuru</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Heritage Circuit</h4>
+          <ul class="footer-links">
+            <li><a href="#destinations" onclick="openDestinationModal('siddaganga')">Sree Siddaganga Mutt</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('devarayanadurga')">Devarayanadurga</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('madhugiri')">Madhugiri Monolith</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('namadachilume')">Namada Chilume</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('mandaragiri')">Mandaragiri Pinchi Dome</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('goravanahalli')">Goravanahalli Temple</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('shivagange')">Shivagange Sacred Peak</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('kaidala')">Kaidala Chennakeshava Temple</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('siddarabetta')">Siddara Betta (Hill of
+                Saints)</a></li>
+            <li><a href="#destinations" onclick="openDestinationModal('channarayanadurga')">Channarayana Durga Fort</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Gastronomy</h4>
+          <ul class="footer-links">
+            <li><a href="#culinary" onclick="switchCulinaryTab('nonveg')">NR Kitchen Nati Biryani</a></li>
+            <li><a href="#culinary" onclick="switchCulinaryTab('veg')">Vilasi Delight (MG Road)</a></li>
+            <li><a href="#culinary" onclick="switchCulinaryTab('veg')">Sasyapaaka (NH 48)</a></li>
+            <li><a href="#culinary" onclick="switchCulinaryTab('veg')">Trikal Cafe (Vidyanagar)</a></li>
+            <li><a href="#culinary" onclick="switchCulinaryTab('nonveg')">SGS Gundu Palav</a></li>
+            <li><a href="#culinary" onclick="switchCulinaryTab('nonveg')">Sharief Bhai Biryani</a></li>
+            <li><a href="#culinary" onclick="switchCulinaryTab('nonveg')">Olumbus Restaurant</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Tourist Information</h4>
+          <ul class="footer-links">
+            <li><a href="tel:18004253000">📞 Karnataka Tourism Helpline: 1800-425-3000</a></li>
+            <li><a href="tel:112">🚨 Police & Emergency Assistance: 112</a></li>
+            <li><a href="#distance-tracker">📍 Live Haversine Distance Engine</a></li>
+            <li><a href="#feedback">✍️ Submit Tourist Review</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 NammaTumakuru Portal • Crafted with reverence for Tumakuru Heritage & Gastronomy.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#home">Back to Top ↑</a>
+          <a href="#destinations">Heritage Circuit</a>
+          <a href="#feedback">Traveler Feedback</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
