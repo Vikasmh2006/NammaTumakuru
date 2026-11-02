@@ -206,7 +206,11 @@
                 <h3 class="card-title">{{ dest.name }}</h3>
                 <span class="card-kannada">{{ dest.kannada }}</span>
                 <div class="card-coords-pill">
-                  <span>Lat: {{ dest.lat }}</span> • <span>Lng: {{ dest.lng }}</span>
+                  <a href="{{ dest.maps_url if dest.maps_url else 'https://www.google.com/maps/dir/?api=1&destination=' ~ dest.lat ~ ',' ~ dest.lng }}"
+                    target="_blank" rel="noopener noreferrer" class="coords-maps-link"
+                    title="Open {{ dest.name }} on Google Maps">
+                    <span>Lat: {{ dest.lat }}</span> • <span>Lng: {{ dest.lng }}</span> <i>↗</i>
+                  </a>
                 </div>
               </div>
 
@@ -224,12 +228,14 @@
               <div class="card-footer">
                 <button class="btn-card-explore" onclick="openDestinationModal('{{ dest.id }}')"
                   id="btn-explore-{{ dest.id }}">
-                  <span>View Details & Modal</span>
+                  <span>View Details</span>
                   <i>↗</i>
                 </button>
-                <button class="btn-calc-single" onclick="updateAllDistances()" title="Recalculate distance">
-                  <span>🔄 Recalculate</span>
-                </button>
+                <a href="{{ dest.maps_url if dest.maps_url else 'https://www.google.com/maps/dir/?api=1&destination=' ~ dest.lat ~ ',' ~ dest.lng }}"
+                  target="_blank" rel="noopener noreferrer" class="btn-card-maps"
+                  title="Open {{ dest.name }} on Google Maps" id="card-maps-{{ dest.id }}">
+                  <span>📍 Maps</span> <i>↗</i>
+                </a>
               </div>
             </div>
           </article>

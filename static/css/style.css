@@ -780,6 +780,25 @@ a {
   margin-top: 4px;
 }
 
+.coords-maps-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--transition-fast);
+}
+
+.coords-maps-link:hover {
+  color: var(--primary-gold-light);
+}
+
+.coords-maps-link i {
+  font-style: normal;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
 .card-summary {
   font-size: 0.92rem;
   color: var(--text-muted);
@@ -838,6 +857,34 @@ a {
   color: #0b0f19;
   border-color: transparent;
   box-shadow: 0 4px 15px var(--gold-glow);
+}
+
+.btn-card-maps {
+  background: rgba(212, 160, 23, 0.08);
+  border: 1px solid rgba(212, 160, 23, 0.28);
+  color: var(--primary-gold-light);
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--transition-fast);
+}
+
+.btn-card-maps:hover {
+  background: var(--gold-gradient);
+  color: #0b0f19;
+  border-color: transparent;
+  box-shadow: 0 4px 14px var(--gold-glow);
+  transform: translateY(-1px);
+}
+
+.btn-card-maps i {
+  font-style: normal;
+  font-weight: 700;
 }
 
 .btn-calc-single {

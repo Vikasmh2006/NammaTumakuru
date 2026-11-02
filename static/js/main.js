@@ -28,7 +28,8 @@ const DESTINATIONS_DATA = {
     timings: "06:00 AM - 08:30 PM daily",
     bestTime: "October to March (Special during January Jatra)",
     entryFee: "Free Admission (Dasoha is open to all visitors)",
-    elevation: "850 m above sea level"
+    elevation: "850 m above sea level",
+    maps_url: "https://maps.app.goo.gl/P8Eg3xvXh5d94JP66"
   },
   "devarayanadurga": {
     name: "Devarayanadurga",
@@ -68,7 +69,8 @@ const DESTINATIONS_DATA = {
     timings: "06:00 AM - 05:30 PM (Trek starts best before 08:30 AM)",
     bestTime: "September to February (Avoid peak midday summer sun)",
     entryFee: "Free Admission (Protected ASI / State Monument)",
-    elevation: "1,200 m above sea level"
+    elevation: "1,200 m above sea level",
+    maps_url: "https://maps.app.goo.gl/K3UN3Mv3v7Saqrt99"
   },
   "namadachilume": {
     name: "Namada Chilume",
@@ -108,7 +110,8 @@ const DESTINATIONS_DATA = {
     timings: "06:30 AM - 07:00 PM daily",
     bestTime: "October to March (Sunset at Mydala lake is unmissable)",
     entryFee: "Free Admission",
-    elevation: "840 m above sea level"
+    elevation: "840 m above sea level",
+    maps_url: "https://maps.app.goo.gl/BCzsjNBjzWzBsdbL8"
   },
   "goravanahalli": {
     name: "Goravanahalli Mahalakshmi Temple",
@@ -128,7 +131,8 @@ const DESTINATIONS_DATA = {
     timings: "06:00 AM - 12:30 PM, 05:30 PM - 08:30 PM (Extended on Fridays & Tuesdays)",
     bestTime: "All year round (Special festivities during Navaratri and Deepavali)",
     entryFee: "Free General Darshan; Special Seva tickets available",
-    elevation: "790 m above sea level"
+    elevation: "790 m above sea level",
+    maps_url: "https://maps.app.goo.gl/VCTawRSGkM6FDyxu6"
   },
   "shivagange": {
     name: "Shivagange",

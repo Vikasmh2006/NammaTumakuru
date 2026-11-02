@@ -76,7 +76,8 @@ DESTINATIONS = [
         "best_time": "October to March (Special during January Jatra)",
         "entry_fee": "Free Admission (Dasoha is open to all visitors)",
         "elevation": "850 m above sea level",
-        "distance_hint": "~6 km from Tumakuru City Center"
+        "distance_hint": "~6 km from Tumakuru City Center",
+        "maps_url": "https://maps.app.goo.gl/P8Eg3xvXh5d94JP66"
     },
     {
         "id": "devarayanadurga",
@@ -120,7 +121,8 @@ DESTINATIONS = [
         "best_time": "September to February (Avoid peak midday summer sun)",
         "entry_fee": "Free Admission (Protected ASI / State Monument)",
         "elevation": "1,200 m above sea level",
-        "distance_hint": "~43 km north of Tumakuru"
+        "distance_hint": "~43 km north of Tumakuru",
+        "maps_url": "https://maps.app.goo.gl/K3UN3Mv3v7Saqrt99"
     },
     {
         "id": "namadachilume",
@@ -164,7 +166,8 @@ DESTINATIONS = [
         "best_time": "October to March (Sunset at Mydala lake is unmissable)",
         "entry_fee": "Free Admission",
         "elevation": "840 m above sea level",
-        "distance_hint": "~12 km south towards Bengaluru Highway"
+        "distance_hint": "~12 km south towards Bengaluru Highway",
+        "maps_url": "https://maps.app.goo.gl/BCzsjNBjzWzBsdbL8"
     },
     {
         "id": "goravanahalli",
@@ -186,7 +189,8 @@ DESTINATIONS = [
         "best_time": "All year round (Special festivities during Navaratri and Deepavali)",
         "entry_fee": "Free General Darshan; Special Seva tickets available",
         "elevation": "790 m above sea level",
-        "distance_hint": "~30 km north-east of Tumakuru via Koratagere"
+        "distance_hint": "~30 km north-east of Tumakuru via Koratagere",
+        "maps_url": "https://maps.app.goo.gl/VCTawRSGkM6FDyxu6"
     },
     {
         "id": "shivagange",
